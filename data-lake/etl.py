@@ -32,7 +32,7 @@ def process_song_data(spark, input_data, output_data):
     # extract columns to create songs table
     songs_table = df \
         .select("song_id", "title", "artist_id", "year", "duration") \
-        .groupBy("song_id")
+        .dropDuplicates()
     
     # write songs table to parquet files partitioned by year and artist
     songs_table \
@@ -47,7 +47,7 @@ def process_song_data(spark, input_data, output_data):
             "artist_location as location", \
             "artist_latitude as latitude", \
             "artist_longitude as longitude") \
-        .groupBy("artist_id")
+        .dropDuplicates()
     
     # write artists table to parquet files
     artists_table \
@@ -70,7 +70,7 @@ def process_log_data(spark, input_data, output_data):
         .selectExpr( \
             "userId as user_id", "firstName as first_name", \
             "lastName as last_name", "gender", "level") \
-        .groupBy("user_id")
+        .dropDuplicates()
     
     # write users table to parquet files
     users_table \
@@ -96,7 +96,7 @@ def process_log_data(spark, input_data, output_data):
         .selectExpr( \
             "ts as start_time", "hour", "day", \
             "week", "month", "year", "weekday") \
-        .groupBy("start_time")
+        .dropDuplicates()
     
     # write time table to parquet files partitioned by year and month
     time_table \
@@ -114,7 +114,8 @@ def process_log_data(spark, input_data, output_data):
         .join(song_df, df.song == song_df.title) \
         .selectExpr("df.ts AS start_time", "df.user_id", "df.level", \
             "song_df.song_id", "song_df.artist_id", "df.session_id", \
-            "df.location", "df.user_agent", "df.month", "df.year")
+            "df.location", "df.user_agent", "df.month", "df.year") \
+        .dropDuplicates()
 
     # write songplays table to parquet files partitioned by year and month
     songplays_table \
