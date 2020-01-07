@@ -50,7 +50,9 @@ def process_song_data(spark, input_data, output_data):
         .groupBy("artist_id")
     
     # write artists table to parquet files
-    artists_table.write.parquet(os.path.join(output_data, 'artists'))
+    artists_table \
+        .write \
+        .parquet(os.path.join(output_data, 'artists'))
 
 
 def process_log_data(spark, input_data, output_data):
@@ -71,7 +73,9 @@ def process_log_data(spark, input_data, output_data):
         .groupBy("user_id")
     
     # write users table to parquet files
-    users_table.write.parquet(os.path.join(output_data, 'users'))
+    users_table \
+        .write \
+        .parquet(os.path.join(output_data, 'users'))
 
     # create timestamp column from original timestamp column
     get_timestamp = udf( \
