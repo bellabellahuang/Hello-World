@@ -38,7 +38,7 @@ def process_song_data(spark, input_data, output_data):
     songs_table \
         .write \
         .partitionBy("year", "artist_id") \
-        .parquet('{}songs/'.format(output_data))
+        .parquet(os.path.join(output_data, 'songs'))
 
     # extract columns to create artists table
     artists_table = df \
@@ -50,7 +50,7 @@ def process_song_data(spark, input_data, output_data):
         .groupBy("artist_id")
     
     # write artists table to parquet files
-    artists_table.write.parquet('{}artists/'.format(output_data))
+    artists_table.write.parquet(os.path.join(output_data, 'artists'))
 
 
 def process_log_data(spark, input_data, output_data):
@@ -71,7 +71,7 @@ def process_log_data(spark, input_data, output_data):
         .groupBy("user_id")
     
     # write users table to parquet files
-    users_table.write.parquet('{}users/'.format(output_data))
+    users_table.write.parquet(os.path.join(output_data, 'users'))
 
     # create timestamp column from original timestamp column
     get_timestamp = udf( \
@@ -98,7 +98,7 @@ def process_log_data(spark, input_data, output_data):
     time_table \
         .write \
         .partitionBy("year", "month") \
-        .parquet('{}time/'.format(output_data))
+        .parquet(os.path.join(output_data, 'time'))
 
     # read in song data to use for songplays table
     song_df = spark \
@@ -116,7 +116,7 @@ def process_log_data(spark, input_data, output_data):
     songplays_table \
         .write \
         .partitionBy("year", "month") \
-        .parquet('{}songplays/'.format(output_data))
+        .parquet(os.path.join(output_data, 'songplays'))
 
 
 def main():
