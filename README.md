@@ -1,6 +1,6 @@
 ### Udacity-DEND
 
-This contains the projects that I completed during my enrollment in the Data Engineer Nano Degree program in Udacity.
+This contains the projects that I completed during my enrollment in the [Data Engineer Nano Degree](https://www.udacity.com/course/data-engineer-nanodegree--nd027) program in Udacity.
 
 #### Enrollment History
 
