@@ -26,9 +26,9 @@ class LoadDimensionOperator(BaseOperator):
 
         if self.append_data == False:
             self.log.info("Clearing data from destination Redshift table")
-            redshift.run("DELETE FROM {}".format(self.table))
+            redshift.run("TRUNCATE TABLE {}".format(self.table))
 
-        self.log.info("Loading fact table")
+        self.log.info(f"Loading {self.table} table")
         formatted_sql = LoadDimensionOperator.insert_sql.format(
             self.table,
             self.query
