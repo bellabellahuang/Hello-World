@@ -8,6 +8,4 @@ This contains the projects that I completed during my enrollment in the [Data En
 - Dec 14, 2019 - Jan 14, 2020
 - Jan 14, 2020 - Feb 14, 2020
 
-#### Certification
-
-[Certification of Completion](https://confirm.udacity.com/QA2M933K)
+#### [Certification of Completion](https://confirm.udacity.com/QA2M933K)
